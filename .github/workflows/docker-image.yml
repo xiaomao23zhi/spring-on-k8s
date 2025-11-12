@@ -1,4 +1,4 @@
-name: spark-on-k8s
+name: spring-on-k8s
 
 # This workflow uses actions that are not certified by GitHub.
 # They are provided by a third-party and are governed by
@@ -20,7 +20,7 @@ env:
   TAG: latest
 
 jobs:
-  spark-on-k8s:
+  spring-on-k8s:
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -53,7 +53,7 @@ jobs:
         id: metadata
         uses: docker/metadata-action@v5
         with:
-          images: ${{ env.REGISTRY }}/spark-on-k8s
+          images: ${{ env.REGISTRY }}/spring-on-k8s
           # generate Docker tags based on the following events/attributes
           tags: |
             type=raw,value=${{ env.TAG }}
