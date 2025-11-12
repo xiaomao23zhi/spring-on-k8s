@@ -1,7 +1,7 @@
 kind: ConfigMap
 apiVersion: v1
 metadata:
-  name: scheduler-service
+  name: spring-on-k8s
   labels:
     spring.cloud.kubernetes.config: "true"
 data:
