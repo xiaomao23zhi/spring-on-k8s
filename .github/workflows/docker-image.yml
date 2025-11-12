@@ -17,7 +17,6 @@ env:
   # Use docker.io for Docker Hub if empty
   REGISTRY: ghcr.io
   # github.repository as <account>/<repo>
-  ORGANIZATION: meganote
   TAG: latest
 
 jobs:
@@ -54,7 +53,7 @@ jobs:
         id: metadata
         uses: docker/metadata-action@v5
         with:
-          images: ${{ env.REGISTRY }}/${{ env.ORGANIZATION }}/spark-on-k8s
+          images: ${{ env.REGISTRY }}/spark-on-k8s
           # generate Docker tags based on the following events/attributes
           tags: |
             type=raw,value=${{ env.TAG }}
