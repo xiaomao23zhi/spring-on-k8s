@@ -19,7 +19,7 @@ ENV SERVER_PORT=8080
 
 WORKDIR /workspace/app
 
-RUN addgroup --system --gid 500 apps && adduser --system --uid 500 --gid 500 apps && \
+RUN addgroup --system apps && adduser --system --ingroup apps apps && \
     mkdir logs && chown apps:apps logs
 
 USER apps
