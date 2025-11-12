@@ -29,7 +29,7 @@ COPY --from=builder ${EXTRACTED}/spring-boot-loader/ ./
 COPY --from=builder ${EXTRACTED}/snapshot-dependencies/ ./
 COPY --from=builder ${EXTRACTED}/application/ ./
 
-COPY bin/entrypoint.sh bin/entrypoint.sh
+COPY --chown=apps:apps bin/entrypoint.sh bin/entrypoint.sh
 RUN chmod +x bin/entrypoint.sh
 
 EXPOSE $SERVER_PORT
