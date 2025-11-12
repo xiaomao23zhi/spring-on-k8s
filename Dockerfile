@@ -9,7 +9,7 @@ COPY pom.xml pom.xml
 COPY src src
 
 RUN --mount=type=cache,target=/home/apps/.m2 ./mvnw package -DskipTests
-RUN java -Djarmode=tools -jar target/*.jar extract --layers --destination extracted
+RUN java -Djarmode=tools -jar target/spring-on-k8s-0.0.1-SNAPSHOT.jar extract --layers --destination extracted
 
 FROM eclipse-temurin:17-jre-alpine
 VOLUME /tmp
