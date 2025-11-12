@@ -53,7 +53,7 @@ jobs:
         id: metadata
         uses: docker/metadata-action@v5
         with:
-          images: ${{ env.REGISTRY }}/spring-on-k8s
+          images: ${{ env.REGISTRY }}/xiaomao23zhi/spring-on-k8s
           # generate Docker tags based on the following events/attributes
           tags: |
             type=raw,value=${{ env.TAG }}
