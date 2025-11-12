@@ -30,6 +30,7 @@ COPY --from=builder ${EXTRACTED}/snapshot-dependencies/ ./
 COPY --from=builder ${EXTRACTED}/application/ ./
 
 COPY bin/entrypoint.sh bin/entrypoint.sh
+RUN chmod +x bin/entrypoint.sh
 
 EXPOSE $SERVER_PORT
 ENTRYPOINT ["/workspace/app/bin/entrypoint.sh"]
