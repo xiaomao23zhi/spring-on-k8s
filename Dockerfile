@@ -14,7 +14,6 @@ RUN java -Djarmode=tools -jar target/spring-on-k8s-0.0.1-SNAPSHOT.jar extract --
 FROM eclipse-temurin:17-jre-alpine
 VOLUME /tmp
 
-ENV EXTRACTED=/builder/extracted
 ENV SERVER_PORT=8080
 
 WORKDIR /workspace/app
@@ -24,10 +23,10 @@ RUN addgroup --system apps && adduser --system --ingroup apps apps && \
 
 USER apps
 
-COPY --from=builder ${EXTRACTED}/dependencies/ ./
-COPY --from=builder ${EXTRACTED}/spring-boot-loader/ ./
-COPY --from=builder ${EXTRACTED}/snapshot-dependencies/ ./
-COPY --from=builder ${EXTRACTED}/application/ ./
+COPY --from=builder /builder/extracted/dependencies/ ./
+COPY --from=builder /builder/extracted/spring-boot-loader/ ./
+COPY --from=builder /builder/extracted/snapshot-dependencies/ ./
+COPY --from=builder /builder/extracted/application/ ./
 
 COPY --chown=apps:apps bin/entrypoint.sh bin/entrypoint.sh
 RUN chmod +x bin/entrypoint.sh
