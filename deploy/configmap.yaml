@@ -1,0 +1,47 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: spring-on-k8s
+  namespace: largemodel-dev
+  labels:
+    spring.cloud.kubernetes.config: "true"
+data:
+  application.yml: |-
+    app:
+      message: this is a message from kubernetes cm/largemodel-dev
+---
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: all-apps
+  namespace: largemodel-dev
+  labels:
+    spring.cloud.kubernetes.config: "true"
+data:
+  application.yml: |-
+    app:
+      info: this is all-apps cm/largemodel-dev
+---
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: spring-on-k8s
+  namespace: largemodel-test
+  labels:
+    spring.cloud.kubernetes.config: "true"
+data:
+  application.yml: |-
+    app:
+      message: this is a message from kubernetes cm/largemodel-test
+---
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: all-apps
+  namespace: largemodel-test
+  labels:
+    spring.cloud.kubernetes.config: "true"
+data:
+  application.yml: |-
+    app:
+      info: this is all-apps cm/largemodel-test

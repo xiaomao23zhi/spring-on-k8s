@@ -1,0 +1,7 @@
+spring:
+  config:
+    import: "kubernetes:"
+
+services:
+  urls:
+    spring-on-k8s: http://spring-on-k8s

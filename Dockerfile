@@ -1,4 +1,5 @@
-FROM eclipse-temurin:17-jdk-alpine as builder
+# syntax=docker/dockerfile:1.10
+FROM registry.cmri.cn/znm/eclipse-temurin:17-jdk-alpine AS builder
 
 WORKDIR /builder
 
@@ -7,19 +8,17 @@ COPY .mvn .mvn
 COPY pom.xml pom.xml
 COPY src src
 
-RUN --mount=type=cache,target=/home/apps/.m2 ./mvnw package -DskipTests
+RUN --mount=type=cache,target=/root/.m2 ./mvnw package -DskipTests
 RUN java -Djarmode=tools -jar target/spring-on-k8s-0.0.1-SNAPSHOT.jar extract --layers --destination extracted
 
-RUN ls -l /builder/extracted/
-
-FROM eclipse-temurin:17-jre-alpine
+FROM registry.cmri.cn/znm/eclipse-temurin:17-jre-alpine
 
 ENV SERVER_PORT=8080
 
 WORKDIR /workspace/app
 
 RUN addgroup --system apps && adduser --system --ingroup apps apps && \
-    mkdir logs && chown -R apps:apps /workspace/app
+    mkdir logs && chown apps:apps logs
 
 USER apps
 

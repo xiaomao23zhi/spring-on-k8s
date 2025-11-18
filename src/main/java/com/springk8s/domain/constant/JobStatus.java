@@ -1,4 +1,4 @@
-package com.meganote.scheduler.domain.constant;
+package com.springk8s.domain.constant;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

@@ -1,4 +1,4 @@
-package com.meganote.scheduler;
+package com.springk8s.application;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

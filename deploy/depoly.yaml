@@ -1,31 +1,30 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: scheduler-service
+  name: spring-on-k8s
+  namespace: largemodel-dev
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: scheduler-service
+      app: spring-on-k8s
   template:
     metadata:
       labels:
-        app: scheduler-service
+        app: spring-on-k8s
     spec:
       affinity:
         nodeAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
             nodeSelectorTerms:
               - matchExpressions:
-                  - key: kubernetes.io/hostname
-                    operator: In
-                    values:
-                      - docker-desktop
+                  - key: node-role.kubernetes.io/worker
+                    operator: Exists
       terminationGracePeriodSeconds: 10
       containers:
-        - name: scheduler-service
-          image: scheduler-service:latest
-          imagePullPolicy: IfNotPresent
+        - name: spring-on-k8s
+          image: registry.cmri.cn/znm/spring-on-k8s:latest
+          imagePullPolicy: Always
           resources:
             requests:
               cpu: "100m"
@@ -51,6 +50,8 @@ spec:
                 secretKeyRef:
                   name: mongo
                   key: password
+            - name: LOGGING_LEVEL_ROOT
+              value: "DEBUG"
           livenessProbe:
             httpGet:
               path: "/actuator/health/liveness"
@@ -79,7 +80,8 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: scheduler-service
+  name: spring-on-k8s
+  namespace: largemodel-dev
   annotations:
     boot.spring.io/actuator: http://:8081/actuator
 spec:
@@ -90,4 +92,4 @@ spec:
       protocol: TCP
       targetPort: 8080
   selector:
-    app: scheduler-service
+    app: spring-on-k8s
